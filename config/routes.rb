@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :categories
   # Se cambio ruta raiz app para que cargue la pagina del index
   #get 'home/index'
   root 'home#index'

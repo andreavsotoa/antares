@@ -1,0 +1,21 @@
+<%=simple_form_for @category do |f| %>
+<%= f.error_notification %>
+<% if @category.errors.any? %>
+<div class="alert alert-danger">
+   <div class="error_explanation">
+      <ul>
+         <% @category.errors.each do |attr,msg| %>
+         <li><%= "#{msg}" if @category.errors[attr].first == msg %> </li>
+         <% end %>
+      </ul>
+   </div>
+</div>
+<% end %>
+
+<%= f.input :nombre, label: 'Nombre', placeholder: "Coloque el nombre", wrapper_html: { class: 'username' } %>  
+
+<%= f.input :descripcion, as: :text, label: 'Descripción', placeholder: "Coloque la descripción", :input_html => {:rows => 10} %> 
+<div class="form-actions" align="center">
+   <%= f.button :submit, "Enviar", :class=> "btn btn-primary" %>
+</div>
+<% end %>
