@@ -1,6 +1,9 @@
 class SubcategoriesController < ApplicationController
   before_action :set_subcategory, only: [:show, :edit, :update, :destroy]
+  before_action :buscar_categorias, only: [:index, :new, :edit]
 
+  layout "administrator" 
+  
   # GET /subcategories
   # GET /subcategories.json
   def index
@@ -14,6 +17,10 @@ class SubcategoriesController < ApplicationController
 
   # GET /subcategories/new
   def new
+    if @categorias.empty?
+      flash.now[:warning] = "No existen categorías creadas para poder 
+      crear una subcategoría"
+    end
     @subcategory = Subcategory.new
   end
 
@@ -71,4 +78,8 @@ class SubcategoriesController < ApplicationController
     def subcategory_params
       params.require(:subcategory).permit(:nombre, :descripcion, :category_id)
     end
+
+    def buscar_categorias
+      @categorias = Category.all
+    end 
 end
